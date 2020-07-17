@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 let base64 = require('base-64');
-require('dotenv').config()
+import {config} from '../../env'
 import {
   StyleSheet,
   Alert,
@@ -35,10 +35,11 @@ getListViewItem = (item) => {
 }
 
 componentDidMount(){
-  let url = 'https://'+process.env.INSTANCE+'.service-now.com/api/now/table/x_514301_shubhamap_shubhamtable';
-  let username = process.env.USERNAME;
-  let password = process.env.PASSWORD;
+  let url = 'https://'+config.INSTANCE+'.service-now.com/api/now/table/'+config.TABLE_API_NAME;
+  let username = config.USERNAME;
+  let password = config.PASSWORD;
   let headers = new Headers();
+  console.log(url,username,password)
   headers.append('Authorization', 'Basic ' + base64.encode(username + ":" + password));
   fetch(url, {method:'GET',
   headers: headers,
